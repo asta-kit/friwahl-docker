@@ -1,0 +1,19 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Wahlzeitraum für Wahl „{election.name}“ anlegen</f:section>
+
+<f:section name="Content">
+
+	<f:form action="createPeriod" name="period">
+		<f:form.hidden property="election" value="{election}" />
+		<label for="period[start]">Beginn</label>
+		<f:form.textfield property="start" value="{f:format.date(format: 'c', date:'now')}" />
+
+		<label for="period[end]">Ende</label>
+		<f:form.textfield property="end" value="{f:format.date(format: 'c', date:'now')}" />
+
+		<f:form.submit value="Anlegen" />
+	</f:form>
+
+	<p>Hinweis: Die Daten müssen in einem Format angegeben werden, das die PHP-Funktion <a href="http://de3.php.net/manual/de/function.date.php"><i>date()</i></a> versteht, z.B. "2014-04-29T12:30".</p>
+</f:section>

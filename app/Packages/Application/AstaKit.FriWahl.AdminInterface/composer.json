@@ -1,0 +1,13 @@
+{
+    "name": "astakit/friwahl-admininterface",
+    "type": "typo3-flow-package",
+    "description": "Admin interface for FriWahl",
+    "require": {
+        "typo3/flow": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "AstaKit\\FriWahl\\AdminInterface": "Classes"
+        }
+    }
+}

@@ -1,0 +1,45 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Wähler-Ansicht</f:section>
+
+<f:section name="Content">
+	<ul>
+		<li>Vorname: {voter.givenName}</li>
+		<li>Nachname: {voter.familyName}</li>
+		<li>Fakultät: {voter.discriminators.department.value}</li>
+		<li>Matrikelnummer: {voter.discriminators.matriculationNumber.value}</li>
+	</ul>
+
+	<h2>Abstimmungen</h2>
+	Der Wähler ist wahlberechtigt für folgende Abstimmungen:
+	<ul>
+		<f:for each="{voter.votings}" as="voting"><li>{voting.name}</li>
+		</f:for>
+	</ul>
+	Er hat folgende Voten abgegeben:
+	<ul>
+		<f:if condition="{voter.votes}">
+			<f:then>
+				<f:for each="{voter.votes}" as="vote"><f:if condition="{vote.committed}">
+					<li><strong>{vote.voting.name}</strong><br />
+						Urne: {vote.ballotbox.identifier} ({vote.ballotbox.name})<br />
+						Datum: {vote.dateCommitted -> f:format.date(format:'c')}
+					</li>
+				</f:if></f:for>
+			</f:then>
+			<f:else>
+				<li><em>keine Voten abgegeben</em></li>
+			</f:else>
+		</f:if>
+	</ul>
+	Folgende Voten sind noch vorgemerkt:
+
+	<ul>
+	<f:for each="{voter.votes}" as="vote"><f:if condition="{vote.committed}"><f:else>
+		<li><strong>{vote.voting.name}</strong><br />
+			Urne: {vote.ballotbox.identifier} ({vote.ballotbox.name})<br />
+			Datum: {vote.dateCreated -> f:format.date(format:'c')}
+		</li>
+	</f:else></f:if></f:for>
+	</ul>
+</f:section>

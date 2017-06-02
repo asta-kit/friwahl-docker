@@ -1,0 +1,18 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Wahl erstellen</f:section>
+
+<f:section name="Content">
+
+	<f:form action="create" object="{election}" name="election">
+		<label for="election[name]">Name</label>
+		<f:form.textfield property="name" />
+
+		<label for="election[identifier]">Kurzbezeichnung (nur A-Z, a-z, 0-9, -, _, +, .)</label>
+		<f:form.textfield property="identifier" size="20" maxlength="20" />
+
+		<label for="election[test]"><f:form.checkbox property="test" value="1" /> Diese Wahl ist eine Testwahl</label>
+
+		<f:form.submit value="Anlegen" />
+	</f:form>
+</f:section>

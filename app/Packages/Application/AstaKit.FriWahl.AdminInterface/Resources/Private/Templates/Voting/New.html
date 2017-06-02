@@ -1,0 +1,61 @@
+<f:layout name="Default"/>
+
+<f:section name="Title">Neue Abstimmung erstellen</f:section>
+
+<f:section name="Content">
+	<f:if condition="{type}">
+		<f:then>
+			<f:form action="create" name="voting">
+				<f:form.hidden property="election" value="{election}" />
+				<f:if condition="{group}">
+				<f:form.hidden property="votingGroup" value="{group}" />
+				</f:if>
+				<f:form.hidden property="__type" value="{typeConfiguration.className}" />
+
+				<f:if condition="{group}">
+					<p>Abstimmung: {group.name}</p>
+				</f:if>
+
+				Typ: {type}<f:comment>TODO show user-friendly name from config here</f:comment>
+
+				<label for="name">Name</label>
+				<f:form.textfield property="name" />
+
+				<f:if condition="{group}">
+					<f:then>
+				Merkmal: {group.discriminator} Wert: <f:form.textfield property="discriminatorValues" /><f:comment>TODO integrate list of unused discriminator values</f:comment>
+					</f:then>
+					<f:else>
+				<label for="discriminator">Merkmal</label>
+				<f:form.select property="discriminator" options="{settings.discriminators}" optionLabelField="label" prependOptionLabel="– keins –" prependOptionValue="" />
+				<label for="discriminatorValue">Wert:</label>
+				<f:form.textfield property="discriminatorValues" />
+					</f:else>
+				</f:if>
+
+				<f:render partial="Voting/{type}/New.html" />
+
+				<f:form.submit value="Anlegen" />
+			</f:form>
+		</f:then>
+		<f:else>
+			<f:form action="new" method="GET">
+				<f:form.hidden name="election" value="{election}" />
+				<f:if condition="{group}">
+				<f:form.hidden name="group" value="{group}" />
+				</f:if>
+
+				<f:if condition="{group}">
+					<p>Abstimmung: {group.name}</p>
+				</f:if>
+
+				<dl>
+					<f:for each="{settings.votingTypes}" as="votingType" key="key">
+						<dt><f:form.radio name="type" value="{key}" /><strong>{votingType.name}</strong></dt><dd>{votingType.description}</dd>
+					</f:for>
+				</dl>
+				<f:form.submit value="Typ auswählen" />
+			</f:form>
+		</f:else>
+	</f:if>
+</f:section>

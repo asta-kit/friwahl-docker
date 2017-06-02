@@ -1,0 +1,14 @@
+{
+    "name": "astakit/friwahl-voterdirectory",
+    "type": "typo3-flow-package",
+    "description": "Add description here",
+    "require": {
+        "typo3/flow": "*",
+        "astakit/friwahl-core": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "AstaKit\\FriWahl\\VoterDirectory": "Classes"
+        }
+    }
+}

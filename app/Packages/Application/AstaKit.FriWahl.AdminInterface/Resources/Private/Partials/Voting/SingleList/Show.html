@@ -1,0 +1,14 @@
+<h2>Kandidaten</h2>
+
+<f:if condition="{voting.list.candidates}">
+	<f:then>
+		<f:for each="{voting.list.candidates}" as="{candidate}">
+			<li>{candidate.fullName}</li>
+		</f:for>
+	</f:then>
+	<f:else>
+		<p>Keine Kandidaten vorhanden</p>
+	</f:else>
+</f:if>
+
+<f:link.action action="newCandidate" controller="VotingProposal" arguments="{votingProposal: voting.list}">Kandidat anlegen</f:link.action>

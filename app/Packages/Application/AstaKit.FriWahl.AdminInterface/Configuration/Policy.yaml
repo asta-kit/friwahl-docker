@@ -1,0 +1,20 @@
+
+roles:
+  ElectionCommittee: []
+
+resources:
+  methods:
+    LoginController: 'method(AstaKit\FriWahl\AdminInterface\Controller\LoginController->(?:(?!initialize).)*Action())'
+    # see <http://stackoverflow.com/questions/977251/regular-expressions-and-negating-a-whole-character-group>
+    ProtectedControllers: 'method(AstaKit\FriWahl\AdminInterface\Controller\(?:(?!Login).)*Controller->(?:(?!initialize).)*Action())'
+
+acls:
+  Anonymous:
+    methods:
+      LoginController: GRANT
+      ProtectedControllers: DENY
+
+  ElectionCommittee:
+    methods:
+      LoginController: GRANT
+      ProtectedControllers: GRANT

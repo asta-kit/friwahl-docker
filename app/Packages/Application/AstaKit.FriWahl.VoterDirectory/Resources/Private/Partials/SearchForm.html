@@ -1,0 +1,39 @@
+
+<p>{election.voterCount} Wähler im Verzeichnis.</p>
+
+<h2>Suche im Wählerverzeichnis</h2>
+<p>Das Verzeichnis kann nach beliebigen Kriterien durchsucht werden. Es wird nach allen Kriterien zugleich gesucht (AND-Verknüpfung), leere Felder werden ignoriert</p>
+
+<f:form action="search" method="GET" object="{search}" name="search">
+	<f:form.hidden property="election" value="{election}" />
+
+	<label for="search[criteria][fields][givenName]">Vorname</label>
+	<f:form.textfield property="criteria.fields.givenName" />
+	<label for="search[criteria][fields][familyName]">Nachname</label>
+	<f:form.textfield property="criteria.fields.familyName" />
+
+	<!-- TODO add discriminators -->
+
+	<f:form.submit value="Suchen" />
+</f:form>
+
+<table>
+	<thead>
+	<tr>
+		<th>Vorname</th>
+		<th>Nachname</th>
+		<th>Fakultät</th>
+	</tr>
+	</thead>
+	<tbody>
+	<f:for each="{search.results}" as="voter">
+	<tr>
+		<td><f:link.action action="show" arguments="{voter: voter}">{voter.givenName}</f:link.action></td>
+		<td><f:link.action action="show" arguments="{voter: voter}">{voter.familyName}</f:link.action></td>
+		<td>{voter.discriminators.department.value}</td>
+	</tr>
+	</f:for>
+	</tbody>
+</table>
+<ul>
+</ul>

@@ -1,0 +1,29 @@
+AstaKit:
+  FriWahl:
+
+    # configuration example for the discriminators;
+#    discriminators:
+#      department:
+#        label: "Department"
+#        type: "string"
+#      matriculationNumber:
+#        label: "Matriculation number"
+#        type: "string"
+#        unique: true
+
+    votingTypes:
+      SingleList:
+        className: 'AstaKit\FriWahl\Core\Domain\Model\SingleListVoting'
+        name: 'Einzelliste'
+
+      MultipleList:
+        className: 'AstaKit\FriWahl\Core\Domain\Model\MultipleListVoting'
+        name: 'Mehrere Listen'
+
+      Plebiscite:
+        className: 'AstaKit\FriWahl\Core\Domain\Model\Plebiscite'
+        name: 'Urabstimmung'
+
+      VotingGroup:
+        className: 'AstaKit\FriWahl\Core\Domain\Model\VotingGroup'
+        name: 'Gruppe von Abstimmungen'

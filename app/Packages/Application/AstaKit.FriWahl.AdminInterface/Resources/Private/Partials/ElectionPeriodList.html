@@ -1,0 +1,10 @@
+<f:if condition="{periods}">
+	<f:then>
+		<ul><f:for each="{periods}" as="period">
+			<li>{period.start -> f:format.date(format: 'Y-m-d H:i')} – {period.end -> f:format.date(format: 'Y-m-d H:i')}</li>
+		</f:for></ul>
+	</f:then>
+	<f:else>
+		<p>keine Wahlzeiträume vorhanden</p>
+	</f:else>
+</f:if>

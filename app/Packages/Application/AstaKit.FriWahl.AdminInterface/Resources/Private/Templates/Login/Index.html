@@ -1,0 +1,24 @@
+<f:layout name="Default"/>
+
+<f:section name="Title">FriWahl – Login</f:section>
+
+<f:section name="Content">
+	<f:security.ifAuthenticated>
+		<f:then>
+			<p>Rollen:</p>
+			<ul>
+				<f:for each="{currentUser.roles}" as="role">
+				<li>{role.identifier}</li></f:for>
+			</ul>
+		</f:then>
+		<f:else>
+	<f:form action="authenticate">
+		<label for="username">Benutzername</label> <f:form.textfield id="username"
+				name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][username]" />
+		<label for="password">Passwort</label> <f:form.password id="password"
+				name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][password]" />
+		<f:form.submit value="Anmelden" />
+	</f:form>
+		</f:else>
+	</f:security.ifAuthenticated>
+</f:section>

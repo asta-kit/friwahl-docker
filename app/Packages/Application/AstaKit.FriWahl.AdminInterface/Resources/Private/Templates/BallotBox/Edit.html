@@ -1,0 +1,17 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Wahlurne <em>{ballotBox.identifier}</em> bearbeiten</f:section>
+
+<f:section name="Content">
+	<f:form action="update" object="{ballotBox}" name="ballotBox">
+		<label>Wahl</label>{ballotBox.election.name}
+
+		<label for="ballotBox[identifier]">eindeutige ID</label> {ballotBox.identifier}
+
+		<label for="ballotBox[name]">Name</label><f:form.textfield property="name" />
+
+		<label for="ballotBox[sshPublicKey]">öffentlicher SSH-Schlüssel</label><f:form.textarea cols="60" rows="6" property="sshPublicKey" />
+
+		<f:form.submit value="Urne speichern" />
+	</f:form>
+</f:section>

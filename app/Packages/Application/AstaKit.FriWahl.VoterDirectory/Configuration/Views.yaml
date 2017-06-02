@@ -1,0 +1,3 @@
+-
+  options:
+    layoutRootPaths: ['resource://AstaKit.FriWahl.AdminInterface/Private/Layouts']

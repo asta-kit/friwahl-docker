@@ -1,0 +1,29 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Wahlurne <em>{ballotBox.identifier}</em></f:section>
+
+<f:section name="Content">
+	<label>Wahl</label> {ballotBox.election.name}
+
+	<label for="ballotBox[identifier]">eindeutige ID</label> {ballotBox.identifier}
+
+	<label for="ballotBox[name]">Name</label> {ballotBox.name}
+
+	<label for="ballotBox[sshPublicKey]">öffentlicher SSH-Schlüssel</label> <pre>{ballotBox.sshPublicKey}</pre>
+
+	<p>Status: {ballotBox.statusText}
+		<f:if condition="{ballotBox.readyToBeEmitted}"><f:form action="emit"><f:form.hidden name="ballotBox" value="{ballotBox}" />
+			<f:form.submit value="Ausgeben" /></f:form>
+		</f:if>
+		<f:if condition="{ballotBox.availableForVotingSession}"><f:form action="return"><f:form.hidden name="ballotBox" value="{ballotBox}" />
+			<f:form.submit value="Zurücknehmen" /></f:form>
+		</f:if>
+	</p>
+
+	<h2>Voten</h2>
+
+	<p>{ballotBox.votesCount} Stimmen in der Urne.</p>
+	<p>{ballotBox.votersCount} Wähler haben Stimmen an der Urne abgegeben.</p>
+
+	<f:link.action action="edit" arguments="{ballotBox: ballotBox}">Urne bearbeiten</f:link.action>
+</f:section>

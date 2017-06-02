@@ -1,0 +1,52 @@
+<f:layout name="Default" />
+
+<f:section name="Title">{election.name}</f:section>
+
+<f:section name="Content">
+	<table>
+		<tbody>
+		<tr>
+			<th>Name</th>
+			<td>{election.name}</td>
+		</tr>
+		<tr>
+			<th>Erstellt</th>
+			<td>{election.created -> f:format.date()}</td>
+		</tr>
+		<tr>
+			<th>Wahlzeiträume</th>
+			<td>
+				<f:render partial="ElectionPeriodList" arguments="{periods: election.periods}" />
+				<f:link.action action="newPeriod" arguments="{election: election}">Neuen Wahlzeitraum anlegen</f:link.action>
+			</td>
+		</tr>
+		<tr>
+			<th>Abstimmungen</th>
+			<td>
+				<f:render partial="VotingList" arguments="{votings: election.votings}" />
+				<f:link.action action="new" controller="Voting" arguments="{election: election}">Neue Abstimmung anlegen</f:link.action>
+			</td>
+		</tr>
+		<tr>
+			<th>Wahlurnen</th>
+			<td>
+				<table>
+					<tr>
+						<th>Urne</th>
+						<th>Status</th>
+						<th>Wähler</th>
+						<th>Stimmen</th>
+					</tr>
+					<f:for each="{election.ballotBoxes}" as="ballotBox"><tr>
+						<td><f:link.action action="show" controller="BallotBox" arguments="{ballotBox: ballotBox}">{ballotBox.identifier} ({ballotBox.name})</f:link.action></td>
+						<td>{ballotBox.statusText}</td>
+						<td style="text-align: right;">{ballotBox.votersCount}</td>
+						<td style="text-align: right;">{ballotBox.votesCount}</td>
+					</tr></f:for>
+				</table>
+				<f:link.action action="new" controller="BallotBox" arguments="{election: election}">Neue Urne anlegen</f:link.action>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</f:section>

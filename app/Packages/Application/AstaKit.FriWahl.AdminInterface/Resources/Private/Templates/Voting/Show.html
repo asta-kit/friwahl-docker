@@ -1,0 +1,21 @@
+<f:layout name="Default"/>
+
+<f:section name="Title">Abstimmung <em>{voting.name}</em></f:section>
+
+<f:section name="Content">
+	<p>Wahl: <f:link.action action="show" controller="Election" arguments="{election: voting.election}">{voting.election.name}</f:link.action></p>
+
+	<f:if condition="{voting.discriminator}">
+		<p>Merkmal: {voting.discriminator}</p>
+	</f:if>
+
+	<f:if condition="{voting.group}">
+		<p>Merkmal: {voting.group.discriminator} – Wert(e): {voting.discriminatorValues -> f:format.json()}</p>
+		<p>Gehört zur Abstimmungs-Gruppe <em><f:link.action action="show" arguments="{voting: voting.group}">{voting.group.name}</f:link.action></em>.</p>
+	</f:if>
+
+	<p>Typ: {voting.type}<f:comment>TODO show user-friendly name from config here</f:comment></p>
+
+	<f:render partial="Voting/{voting.type}/Show.html" arguments="{voting: voting}" />
+
+</f:section>

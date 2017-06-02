@@ -1,0 +1,10 @@
+<p>Dies ist eine Abstimmungs-Gruppe. Sie stellt für verschiedene Wählergruppen verschiedene Abstimmungen zur Verfügung, an Hand eines im Wählerverzeichnis hinterlegten Merkmals (z.B. Zugehörigkeit zu einer Organisationseinheit, Geschlecht o.ä.).</p>
+
+<p>Abstimmungen:</p>
+<ul>
+	<f:for each="{voting.votings}" as="groupVoting">
+	<li><f:link.action action="show" arguments="{voting: groupVoting}">{groupVoting.name}</f:link.action> – {groupVoting.discriminatorValues -> f:format.json()}</li>
+	</f:for>
+</ul>
+
+<f:link.action action="new" arguments="{group: voting}">Neue Abstimmung hinzufügen</f:link.action>

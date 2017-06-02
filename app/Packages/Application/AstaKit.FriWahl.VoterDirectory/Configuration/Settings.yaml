@@ -1,0 +1,31 @@
+AstaKit:
+  FriWahl:
+    VoterDirectory:
+      importFormats:
+        example:
+          fieldSeparator: ","
+          fieldWrap: "\""
+          fields:
+            -
+              type: "discriminator"
+              name: "matriculationNumber"
+            -
+              # e.g. Sullivan, Glotzkowski
+              type: "property"
+              name: "familyName"
+            -
+              # e.g. James P., Mike
+              type: "property"
+              name: "givenName"
+            -
+              type: "discriminator"
+              name: "department"
+              failIfMissingValue: true
+              preProcessing:
+                - trim
+              valueMap:
+                "School of Scaring": "scaring"
+                "School of Engineering": "eng"
+                "School of Liberal Arts & Monstrosities": "libart"
+                "School of Science": "science"
+                "School of Business": "business"

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title><f:format.stripTags><f:render section="Title" /></f:format.stripTags></title>
+		<f:base />
+	</head>
+	<body>
+		<p>
+		<f:security.ifAuthenticated>
+			<f:then>Angemeldet als {currentUser.accountIdentifier} – {currentUser.party.name} &bull; <f:link.action action="logout" controller="Login" package="AstaKit.FriWahl.AdminInterface">Abmelden</f:link.action></f:then>
+			<f:else>Nicht angemeldet</f:else>
+		</f:security.ifAuthenticated>
+		</p>
+
+		<f:flashMessages class="flashmessages" />
+
+		<h1><f:render section="Title" /></h1>
+		<f:render section="Content" />
+	</body>
+</html>

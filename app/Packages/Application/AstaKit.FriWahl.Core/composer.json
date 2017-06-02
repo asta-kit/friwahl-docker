@@ -1,0 +1,13 @@
+{
+    "name": "astakit/friwahl-core",
+    "type": "typo3-flow-package",
+    "description": "Core components (data models, repositories, central services) for FriWahl",
+    "require": {
+        "typo3/flow": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "AstaKit\\FriWahl\\Core": "Classes"
+        }
+    }
+}

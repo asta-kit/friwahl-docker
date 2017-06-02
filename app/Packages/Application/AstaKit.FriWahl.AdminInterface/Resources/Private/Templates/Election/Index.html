@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Wahlen</f:section>
+
+<f:section name="Content">
+	<table>
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Erstellt</th>
+			<th>Wahlzeiträume</th>
+		</tr>
+		</thead>
+		<tbody>
+		<f:for each="{elections}" as="election">
+		<tr>
+			<td><f:link.action action="show" arguments="{election: election}">{election.name}</f:link.action></td>
+			<td>{election.created}</td>
+			<td><f:render partial="ElectionPeriodList" arguments="{periods: election.periods}" /></td>
+		</tr>
+		</f:for>
+		</tbody>
+	</table>
+	<f:link.action action="new">Neue Wahl anlegen</f:link.action>
+</f:section>

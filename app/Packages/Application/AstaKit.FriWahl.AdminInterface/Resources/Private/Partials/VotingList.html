@@ -1,0 +1,10 @@
+<f:if condition="{votings}">
+	<f:then>
+		<ul><f:for each="{votings}" as="voting">
+			<li><f:link.action action="show" controller="Voting" package="AstaKit.FriWahl.AdminInterface" arguments="{voting: voting}">{voting.name} <f:if condition="{voting.group}">– <em>{voting.group.name}</em></f:if></f:link.action></li>
+		</f:for></ul>
+	</f:then>
+	<f:else>
+		<p>keine Abstimmungen vorhanden</p>
+	</f:else>
+</f:if>
