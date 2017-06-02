@@ -1,0 +1,30 @@
+version: '2'
+services:
+  friwahl-fpm:
+    container_name: friwahl-php
+    image: noc0lour/php:5.6.30-fpm-alpine-friwahl
+    environment:
+      - DB_NAME=something
+    links:
+      - friwahl-db
+    depends_on:
+      - friwahl-db
+    ports:
+      - "9000:9000"
+      - "9989:9989"
+    volumes:
+    networks:
+      friwahl-internal:
+        aliases:
+          - friwahl
+  friwahl-db:
+    container_name: friwahl-db
+    env_file:
+        - db.env
+    image: mysql:5.7
+    networks:
+      friwahl-internal:
+        aliases:
+          - db
+networks:
+ friwahl-internal:
