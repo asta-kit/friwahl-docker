@@ -1,0 +1,56 @@
+#                                                                        #
+# Example Settings                                                       #
+#                                                                        #
+# This file contains settings for various parts of the application.      #
+# Copy this file to Settings.yaml, and adjust as necessary.              #
+#                                                                        #
+# Please refer to the default settings file(s) or the manuals for        #
+# possible configuration options.                                        #
+#                                                                        #
+
+TYPO3:
+  Flow:
+    persistence:
+
+      # It is good practice to not specify user name and password of the database
+      # connection in this global Settings.yaml file. Rather specify them in the
+      # settings of the respective context (Production / Development ...).
+      backendOptions:
+        host: friwahl-db    # adjust to your database host
+    security:
+      authentication:
+        providers:
+          DefaultProvider:
+            provider: PersistedUsernamePasswordProvider
+AstaKit:
+  FriWahl:
+    VoterDirectory:
+      importFormats:
+        testFormat:
+          fieldSeparator: ","
+          fieldWrap: "\""
+          fields:
+            -
+              type: "discriminator"
+              name: "matriculationNumber"
+            -
+              # e.g. Sullivan, Glotzkowski
+              type: "property"
+              name: "familyName"
+            -
+              # e.g. James P., Mike
+              type: "property"
+              name: "givenName"
+            -
+              type: "discriminator"
+              name: "department"
+              failIfMissingValue: true
+              preProcessing:
+                - trim
+              valueMap:
+                "Fakultät für Dinge": "dinge"
+                "Fakultät für Engel": "eng"
+                "Fakultät für Artisten": "art"
+    discriminators:
+      department: "Department"
+      matriculationNumber: "Matriculation number"
