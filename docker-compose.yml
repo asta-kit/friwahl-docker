@@ -1,30 +1,52 @@
 version: '2'
 services:
-  friwahl-fpm:
+  friwahl-php:
     container_name: friwahl-php
     image: noc0lour/php:5.6.30-fpm-alpine-friwahl
-    environment:
-      - DB_NAME=something
+    env_file:
+      - db.env
+      - flow.env
     links:
       - friwahl-db
     depends_on:
       - friwahl-db
-    ports:
-      - "9000:9000"
-      - "9989:9989"
     volumes:
+      - ../FriWahl-distribution:/app
+      - ./php.ini:/usr/local/etc/php/php.ini:ro
     networks:
       friwahl-internal:
         aliases:
           - friwahl
+
   friwahl-db:
     container_name: friwahl-db
     env_file:
         - db.env
     image: mysql:5.7
+    volumes:
+      - ./custom.cnf:/etc/mysql/mysql.conf.d/custom.cnf:ro
+      - ./data/db:/var/lib/mysql
     networks:
       friwahl-internal:
         aliases:
           - db
+
+  friwahl-web:
+    container_name: friwahl-web
+    image: nginx:1.13-alpine
+    volumes:
+      - ./nginx-friwahl.conf:/etc/nginx/nginx.conf:ro
+      - ../FriWahl-distribution:/app:ro
+    links:
+      - friwahl-php
+    depends_on:
+      - friwahl-db
+    ports:
+      - "80:80"
+    networks:
+      friwahl-internal:
+        aliases:
+          - web
+  
 networks:
  friwahl-internal:
